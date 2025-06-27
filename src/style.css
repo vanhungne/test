@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Focus styles for accessibility */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid #1f2937;
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* Animated underline for links */
+  .link-underline {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: #000;
+    transition: width 0.3s ease-out;
+  }
+  
+  .link-underline:hover::after {
+    width: 100%;
+  }
+  
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+  
+  /* Screen reader only */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  
+  /* Scroll settings for products container */
+  .products-grid {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Scroll snap for smooth scrolling */
+  .products-grid {
+    scroll-snap-type: x mandatory;
+  }
+  
+  .products-grid > article {
+    scroll-snap-align: start;
+  }
+  
+  /* Smooth scroll deceleration */
+  .products-grid {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: auto; /* Remove smooth scroll for better drag control */
+  }
+  
+  /* Product card image loading placeholder */
+  .product-image-wrapper {
+    background: linear-gradient(to right, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  
+  .product-image-wrapper img {
+    animation: fadeIn 0.3s ease-in;
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: -100% 0; }
+    100% { background-position: 100% 0; }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* Print styles */
+  @media print {
+    .no-print {
+      display: none;
+    }
+  }
+}

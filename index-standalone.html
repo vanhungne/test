@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SALIENT Skincare - Quality Ingredients. Real Results.</title>
+    <meta name="description" content="Discover SALIENT's premium skincare products made with quality ingredients for real results.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Animated underline for links */
+        .link-underline {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .link-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #000;
+            transition: width 0.3s ease-out;
+        }
+        
+        .link-underline:hover::after {
+            width: 100%;
+        }
+        
+        /* Hide scrollbar but keep functionality */
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;  /* Chrome, Safari and Opera */
+        }
+        
+        /* Scroll settings */
+        .products-grid {
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Scroll snap for smooth scrolling */
+        .products-grid {
+            scroll-snap-type: x mandatory;
+        }
+        
+        .products-grid > article {
+            scroll-snap-align: start;
+        }
+        
+        /* Smooth scroll deceleration */
+        .products-grid {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: auto; /* Remove smooth scroll for better drag control */
+        }
+        
+        /* Loading states */
+        .product-image-wrapper {
+            background: linear-gradient(to right, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        
+        .product-image-wrapper img {
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -100% 0; }
+            100% { background-position: 100% 0; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased bg-white text-gray-900">
+    <!-- Header Navigation -->
+    <header class="site-header w-full bg-white border-b border-gray-100" role="banner">
+        <nav class="main-navigation max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+            <div class="nav-container flex items-center justify-between h-16 md:h-20">
+                <!-- Left Navigation -->
+                <div class="nav-left flex-1">
+                    <!-- Mobile Menu Button -->
+                    <button type="button" class="sm:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors" aria-label="Menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    
+                    <ul class="nav-menu hidden sm:flex items-center space-x-4 sm:space-x-6 md:space-x-8" role="menubar">
+                        <li role="none" class="relative group">
+                            <button type="button" role="menuitem" aria-haspopup="true" aria-expanded="false" class="link-underline text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors duration-200 flex items-center gap-1">
+                                Skincare
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-hover:rotate-180">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            
+                            <!-- Skincare Dropdown Menu -->
+                            <div class="absolute left-0 top-full mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform -translate-y-2 group-hover:translate-y-0 z-50">
+                                <div class="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden min-w-[560px]">
+                                    <div class="p-6 grid grid-cols-2 gap-x-6 gap-y-1">
+                                        <!-- Cleanse -->
+                                        <a href="#cleanse" class="group/item flex items-start gap-4 p-3 rounded-lg hover:bg-orange-50 transition-colors duration-200">
+                                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform duration-200">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500">
+                                                    <circle cx="12" cy="12" r="5"></circle>
+                                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold text-gray-900 mb-0.5">Cleanse</h4>
+                                                <p class="text-sm text-gray-600">Gently remove all skin impurities</p>
+                                            </div>
+                                        </a>
+                                        
+                                        <!-- Anti-Acne -->
+                                        <a href="#anti-acne" class="group/item flex items-start gap-4 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
+                                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform duration-200">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <circle cx="12" cy="12" r="6"></circle>
+                                                    <circle cx="12" cy="12" r="2"></circle>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold text-gray-900 mb-0.5">Anti-Acne</h4>
+                                                <p class="text-sm text-gray-600">Say goodbye to breakouts</p>
+                                            </div>
+                                        </a>
+                                        
+                                        <!-- Moisturize -->
+                                        <a href="#moisturize" class="group/item flex items-start gap-4 p-3 rounded-lg hover:bg-cyan-50 transition-colors duration-200">
+                                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-100 to-cyan-50 flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform duration-200">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-500">
+                                                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold text-gray-900 mb-0.5">Moisturize</h4>
+                                                <p class="text-sm text-gray-600">Deep hydrating penetration</p>
+                                            </div>
+                                        </a>
+                                        
+                                        <!-- Supplements -->
+                                        <a href="#supplements" class="group/item flex items-start gap-4 p-3 rounded-lg hover:bg-purple-50 transition-colors duration-200">
+                                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform duration-200">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-500">
+                                                    <path d="M10 2v7.31"></path>
+                                                    <path d="M14 9.3V1.99"></path>
+                                                    <path d="M8.5 2h7"></path>
+                                                    <path d="M14 9.3a6.5 6.5 0 1 1-4 0"></path>
+                                                    <path d="M5.52 16c.24.52.56 1 .97 1.41L8 16"></path>
+                                                    <path d="M16 8l1.41 1.52c.41.41.75.93.97 1.45"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold text-gray-900 mb-0.5">Supplements</h4>
+                                                <p class="text-sm text-gray-600">Give your skin the added edge</p>
+                                            </div>
+                                        </a>
+                                        
+                                        <!-- Exfoliators -->
+                                        <a href="#exfoliators" class="group/item flex items-start gap-4 p-3 rounded-lg hover:bg-amber-50 transition-colors duration-200">
+                                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform duration-200">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500">
+                                                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+                                                    <path d="M5 3v4"></path>
+                                                    <path d="M19 17v4"></path>
+                                                    <path d="M3 5h4"></path>
+                                                    <path d="M17 19h4"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold text-gray-900 mb-0.5">Exfoliators</h4>
+                                                <p class="text-sm text-gray-600">Nourish your skin for an all-day glow</p>
+                                            </div>
+                                        </a>
+                                        
+                                        <!-- Extracts -->
+                                        <a href="#extracts" class="group/item flex items-start gap-4 p-3 rounded-lg hover:bg-green-50 transition-colors duration-200">
+                                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform duration-200">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500">
+                                                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                                                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold text-gray-900 mb-0.5">Extracts</h4>
+                                                <p class="text-sm text-gray-600">Harness the power of vitamins</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li role="none">
+                            <a href="#accessories" role="menuitem" class="link-underline text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors duration-200">Accessories</a>
+                        </li>
+                        <li role="none">
+                            <a href="#new" role="menuitem" class="new-badge link-underline flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors duration-200">
+                                New
+                                <span aria-label="New items available" class="text-xs">⭐</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Logo -->
+                <div class="nav-center flex-shrink-0 px-4">
+                    <a href="/" class="logo" aria-label="SALIENT homepage">
+                        <h1 class="text-2xl md:text-3xl font-light tracking-[0.2em] uppercase">SALIENT</h1>
+                    </a>
+                </div>
+                
+                <!-- Right Navigation -->
+                <div class="nav-right flex-1 flex justify-end">
+                    <ul class="nav-menu flex items-center space-x-4 md:space-x-6" role="menubar">
+                        <li role="none" class="hidden md:block">
+                            <a href="#demos" role="menuitem" class="link-underline text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors duration-200">Demos</a>
+                        </li>
+                        <li role="none">
+                            <button type="button" aria-label="Search products" role="menuitem" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.35-4.35"></path>
+                                </svg>
+                            </button>
+                        </li>
+                        <li role="none">
+                            <button type="button" aria-label="User account" role="menuitem" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </button>
+                        </li>
+                        <li role="none">
+                            <button type="button" aria-label="Shopping cart" role="menuitem" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="9" cy="21" r="1"></circle>
+                                    <circle cx="20" cy="21" r="1"></circle>
+                                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                                </svg>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Main Content -->
+    <main role="main">
+        <!-- Hero Section -->
+        <section class="hero-section py-8 md:py-12 bg-gradient-to-b from-gray-50 to-white" aria-labelledby="hero-heading">
+            <div class="hero-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <h2 id="hero-heading" class="hero-title text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 tracking-tight max-w-2xl">Quality ingredients. Real results.</h2>
+                <a href="#all-products" class="view-all-link link-underline text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors duration-200 whitespace-nowrap">View All Products</a>
+            </div>
+        </section>
+        
+        <!-- Product Carousel -->
+        <section class="products-section py-4 sm:py-6 md:py-8" aria-labelledby="products-heading">
+            <h2 id="products-heading" class="sr-only">Our Products</h2>
+            <div class="products-container mx-auto overflow-hidden" style="max-width: 1360px;">
+                <div id="productsCarousel" class="products-grid flex gap-4 sm:gap-6 pl-4 sm:pl-6 lg:pl-8 pr-0" role="list" style="cursor: grab; will-change: transform; transition: none;">
+                    <!-- Products will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Vanilla JavaScript Product Carousel -->
+    <script>
+        // Products data
+        const products = [
+            {
+                id: 1,
+                name: "Daily anti-acne cream with Tretinoin",
+                description: "A multi-purpose cream that fights breakouts while keeping skin youthful.",
+                image: "images/1.jpg",
+                background: "bg-white"
+            },
+            {
+                id: 2,
+                name: "Magic eye kit",
+                description: "Super charged active retinol cream that fights off stubborn eye bags 24/7.",
+                image: "images/2.jpg",
+                background: "bg-gradient-to-br from-purple-100 via-purple-50 to-pink-100"
+            },
+            {
+                id: 3,
+                name: "Multi-peptide soothing moisturizer",
+                description: "An excellent source of antioxidants to sooth your skin. Made from waterlily extracts.",
+                image: "images/3.jpg",
+                background: "bg-white"
+            },
+            {
+                id: 4,
+                name: "Refreshing complete vitamin C Nectar serum",
+                description: "Protect and rejuvenate your skin with our most potent vitamin C serum yet.",
+                image: "images/4.jpg",
+                background: "bg-gradient-to-br from-orange-100 via-yellow-50 to-amber-100"
+            },
+            {
+                id: 5,
+                name: "Hydrating facial cleanser",
+                description: "Gentle, pH-balanced cleanser that removes impurities without stripping natural oils.",
+                image: "images/5.jpg",
+                background: "bg-white"
+            },
+            {
+                id: 6,
+                name: "Brightening face mask",
+                description: "Weekly treatment mask infused with vitamin C and niacinamide for radiant skin.",
+                image: "images/6.jpg",
+                background: "bg-gradient-to-br from-green-100 via-emerald-50 to-teal-100"
+            },
+            {
+                id: 7,
+                name: "Overnight repair serum",
+                description: "Intensive night treatment with peptides and ceramides to restore skin barrier.",
+                image: "images/7.jpg",
+                background: "bg-white"
+            }
+        ];
+
+        // Render products
+        const carousel = document.getElementById('productsCarousel');
+        products.forEach((product, index) => {
+            const productCard = document.createElement('article');
+            productCard.className = `product-card ${product.background} overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex-shrink-0`;
+            productCard.style.width = '420px';
+            productCard.style.height = '640px';
+            productCard.setAttribute('role', 'listitem');
+            
+            productCard.innerHTML = `
+                <div class="product-image-wrapper relative overflow-hidden" style="height: 525px;">
+                    <img src="${product.image}" alt="${product.name}" class="product-image w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-110" loading="lazy" draggable="false">
+                </div>
+                <div class="product-content p-4 sm:p-5">
+                    <h3 class="product-name text-base sm:text-lg font-medium text-gray-900 mb-2 leading-tight">${product.name}</h3>
+                    <p class="product-description text-sm text-gray-600 leading-relaxed">${product.description}</p>
+                </div>
+            `;
+            
+            carousel.appendChild(productCard);
+        });
+
+        // Drag functionality
+        let isDragging = false;
+        let currentX = 0;
+        let initialX = 0;
+        let xOffset = 0;
+        let velocity = 0;
+        let lastX = 0;
+        let lastTime = Date.now();
+        let animationId = null;
+        
+        // Get all product cards
+        const productCards = carousel.querySelectorAll('.product-card');
+        
+        // Calculate constraints
+        const cardWidth = 420;
+        const gap = 24;
+        const totalWidth = (cardWidth + gap) * products.length - gap;
+        const containerWidth = 1360;
+        const maxDrag = Math.min(0, containerWidth - totalWidth - 64); // -64 for padding
+
+        // Start dragging
+        function dragStart(e) {
+            e.preventDefault();
+            
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+            
+            isDragging = true;
+            carousel.style.cursor = 'grabbing';
+            carousel.style.transition = 'none';
+            
+            // Get initial position
+            initialX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            currentX = xOffset;
+            lastX = initialX;
+            lastTime = Date.now();
+            velocity = 0;
+            
+            // Add dragging class to all cards
+            productCards.forEach(card => {
+                card.style.transform = 'scale(0.95)';
+                card.style.transition = 'transform 0.2s ease-out';
+            });
+        }
+        
+        // Dragging
+        function drag(e) {
+            if (!isDragging) return;
+            
+            e.preventDefault();
+            const x = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            const currentTime = Date.now();
+            const deltaTime = currentTime - lastTime;
+            const deltaX = x - lastX;
+            
+            // Calculate velocity for momentum
+            if (deltaTime > 0) {
+                velocity = deltaX / deltaTime * 16; // Scale for 60fps
+            }
+            
+            currentX = xOffset + (x - initialX);
+            
+            // Apply constraints in real-time
+            currentX = Math.max(maxDrag, Math.min(0, currentX));
+            
+            // Apply transform
+            carousel.style.transform = `translate3d(${currentX}px, 0, 0)`;
+            
+            lastX = x;
+            lastTime = currentTime;
+        }
+        
+        // Stop dragging
+        function dragEnd(e) {
+            if (!isDragging) return;
+            
+            isDragging = false;
+            carousel.style.cursor = 'grab';
+            
+            // Return cards to normal size
+            productCards.forEach(card => {
+                card.style.transform = 'scale(1)';
+                card.style.transition = 'transform 0.3s ease-out';
+            });
+            
+            // Update offset
+            xOffset = currentX;
+            
+            // Snap to nearest card
+            const cardWidthWithGap = cardWidth + gap;
+            const snapPosition = Math.round(xOffset / cardWidthWithGap) * cardWidthWithGap;
+            const finalPosition = Math.max(maxDrag, Math.min(0, snapPosition));
+            
+            // Apply momentum with ease-out
+            if (Math.abs(velocity) > 2) {
+                applyMomentum(velocity);
+            } else {
+                // Just snap if velocity is low
+                animateToPosition(finalPosition);
+            }
+        }
+        
+        // Apply momentum scrolling with ease-out
+        function applyMomentum(initialVelocity) {
+            let currentVelocity = initialVelocity * 0.5;
+            const friction = 0.95;
+            const minVelocity = 0.1;
+            
+            function animate() {
+                if (Math.abs(currentVelocity) > minVelocity) {
+                    xOffset += currentVelocity;
+                    xOffset = Math.max(maxDrag, Math.min(0, xOffset));
+                    
+                    carousel.style.transform = `translate3d(${xOffset}px, 0, 0)`;
+                    
+                    currentVelocity *= friction;
+                    animationId = requestAnimationFrame(animate);
+                } else {
+                    // Snap to nearest card when momentum stops
+                    const cardWidthWithGap = cardWidth + gap;
+                    const snapPosition = Math.round(xOffset / cardWidthWithGap) * cardWidthWithGap;
+                    const finalPosition = Math.max(maxDrag, Math.min(0, snapPosition));
+                    animateToPosition(finalPosition);
+                }
+            }
+            
+            animate();
+        }
+        
+        // Animate to specific position with ease-out
+        function animateToPosition(targetX) {
+            const startX = xOffset;
+            const deltaX = targetX - startX;
+            const duration = 300;
+            const startTime = Date.now();
+            
+            function animate() {
+                const currentTime = Date.now();
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Ease-out cubic
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                
+                xOffset = startX + deltaX * easeOut;
+                carousel.style.transform = `translate3d(${xOffset}px, 0, 0)`;
+                
+                if (progress < 1) {
+                    animationId = requestAnimationFrame(animate);
+                }
+            }
+            
+            animate();
+        }
+        
+        // Add event listeners
+        carousel.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', dragEnd);
+        
+        // Touch events
+        carousel.addEventListener('touchstart', dragStart, { passive: false });
+        document.addEventListener('touchmove', drag, { passive: false });
+        document.addEventListener('touchend', dragEnd);
+        
+        // Prevent context menu on right click
+        carousel.addEventListener('contextmenu', e => e.preventDefault());
+    </script>
+    
+    <style>
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</body>
+</html>
